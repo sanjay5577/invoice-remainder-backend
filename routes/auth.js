@@ -1,10 +1,9 @@
 const router = require("express").Router();
 const passport = require("passport");
 
-console.log("yes")
 
 router.get("/login/success", (req, res) => {
-	console.log("yes2")
+	console.log("inside login success")
 	if (req.user) {
         res.json({
             success: true,
