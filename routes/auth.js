@@ -41,6 +41,7 @@ router.get(
         failureRedirect: "/login/failed",
     }),
     (req, res) => {
+	    console.log(req.user)
         res.redirect(`${process.env.CLIENT_URL}`); // Redirect to the frontend homepage
     }
 );
