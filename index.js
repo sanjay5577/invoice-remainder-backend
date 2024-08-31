@@ -5,7 +5,6 @@ const passport = require("passport");
 const authRoute = require("./routes/auth");
 const cookieSession = require("cookie-session");
 const passportStrategy = require("./passport");
-const session = require('express-session');
 const app = express();
 
 
@@ -16,22 +15,16 @@ app.use(
 	})
 );
 
-// app.use(
-// 	cookieSession({
-// 		name: "session",
-// 		keys: ["lama"],
-// 		maxAge: 24 * 60 * 60 * 1000,
-// 		// secure: true, // Ensure this is true when using HTTPS
-//                 // sameSite: "none", // Required for cross-origin requests
-// 	})
-// );
+app.use(
+	cookieSession({
+		name: "session",
+		keys: ["lama"],
+		maxAge: 24 * 60 * 60 * 1000,
+	        secure: true, // Ensure this is true when using HTTPS
+               sameSite: "none", // Required for cross-origin requests
+	})
+);
 
-app.use(session({
-  secret: 'mysecrethaha',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
-}))
 
 app.use(passport.initialize());
 app.use(passport.session());
