@@ -26,11 +26,12 @@ app.use(
 // 	})
 // );
 
-app.use(require('express-session')({ 
-  secret: 'my-secret-haha',
-  resave: true,
-  saveUninitialized: true
-}));
+app.use(session({
+  secret: 'mysecrethaha',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
 
 app.use(passport.initialize());
 app.use(passport.session());
