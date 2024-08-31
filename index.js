@@ -12,7 +12,7 @@ app.use(
 		name: "session",
 		keys: ["cyberwolve"],
 		maxAge: 24 * 60 * 60 * 1000,
-		secure: true, // Ensure this is true when using HTTPS
+		secure: false, // Ensure this is true when using HTTPS
                 sameSite: "none", // Required for cross-origin requests
 	})
 );
@@ -26,6 +26,12 @@ app.use(
 		credentials: true,
 	})
 );
+
+app.use((req, res, next) => {
+    console.log('Request Cookies:', req.cookies); // Logs incoming cookies
+    next();
+});
+
 
 app.use("/auth", authRoute);
 
