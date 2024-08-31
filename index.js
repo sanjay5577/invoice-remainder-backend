@@ -8,6 +8,13 @@ const passportStrategy = require("./passport");
 const app = express();
 
 app.use(
+	cors({
+		origin: "https://invoice-remainder-frontend.vercel.app",
+		credentials: true,
+	})
+);
+
+app.use(
 	cookieSession({
 		name: "session",
 		keys: ["cyberwolve"],
@@ -19,13 +26,6 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.use(
-	cors({
-		origin: "https://invoice-remainder-frontend.vercel.app",
-		credentials: true,
-	})
-);
 
 app.use((req, res, next) => {
 	console.log('Request Headers:', req.headers); // Logs incoming headers
