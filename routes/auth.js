@@ -35,13 +35,16 @@ router.get(
     "/google/callback",
     (req, res, next) => {
         console.log("Google OAuth callback route triggered");
-        next(); // Proceed to the passport.authenticate middleware
+        next();
     },
     passport.authenticate("google", {
-        successRedirect: "/login/success",
         failureRedirect: "/login/failed",
-    })
+    }),
+    (req, res) => {
+        res.redirect(`${process.env.CLIENT_URL}`); // Redirect to the frontend homepage
+    }
 );
+
 
 
 router.get("/logout", (req, res) => {
