@@ -17,10 +17,10 @@ app.use(
 app.use(
 	cookieSession({
 		name: "session",
-		keys: ["cyberwolve"],
+		keys: ["lama"],
 		maxAge: 24 * 60 * 60 * 1000,
-		secure: true, // Ensure this is true when using HTTPS
-                sameSite: "none", // Required for cross-origin requests
+		// secure: true, // Ensure this is true when using HTTPS
+                // sameSite: "none", // Required for cross-origin requests
 	})
 );
 
