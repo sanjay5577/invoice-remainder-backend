@@ -25,15 +25,24 @@ router.get("/login/failed", (req, res) => {
 	});
 });
 
-router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
+router.get("/google", (req, res, next) => {
+    console.log("Google OAuth route triggered");
+    passport.authenticate("google", { scope: ["profile", "email"] })(req, res, next);
+});
+
 
 router.get(
-	"/google/callback",
-	passport.authenticate("google", {
-		successRedirect: process.env.CLIENT_URL,
-		failureRedirect: "/login/failed",
-	})
+    "/google/callback",
+    (req, res, next) => {
+        console.log("Google OAuth callback route triggered");
+        next(); // Proceed to the passport.authenticate middleware
+    },
+    passport.authenticate("google", {
+        successRedirect: process.env.CLIENT_URL,
+        failureRedirect: "/login/failed",
+    })
 );
+
 
 router.get("/logout", (req, res) => {
 	req.logout();
