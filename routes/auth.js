@@ -38,7 +38,7 @@ router.get(
         next(); // Proceed to the passport.authenticate middleware
     },
     passport.authenticate("google", {
-        successRedirect: process.env.CLIENT_URL,
+        successRedirect: "/login/success",
         failureRedirect: "/login/failed",
     })
 );
