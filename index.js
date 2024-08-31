@@ -5,7 +5,9 @@ const passport = require("passport");
 const authRoute = require("./routes/auth");
 const cookieSession = require("cookie-session");
 const passportStrategy = require("./passport");
+const session = require('express-session');
 const app = express();
+
 
 app.use(
 	cors({
@@ -23,6 +25,12 @@ app.use(
 //                 // sameSite: "none", // Required for cross-origin requests
 // 	})
 // );
+
+app.use(require('express-session')({ 
+  secret: 'my-secret-haha',
+  resave: true,
+  saveUninitialized: true
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
